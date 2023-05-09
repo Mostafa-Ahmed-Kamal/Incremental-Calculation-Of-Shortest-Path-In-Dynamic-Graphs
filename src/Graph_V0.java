@@ -2,6 +2,9 @@ import java.util.*;
 
 public class Graph_V0 {
     private final HashMap<Integer, HashSet<Integer>> graph;
+    public Graph_V0(){
+        graph = new HashMap<>();
+    }
     public Graph_V0(String initialGraph){
         graph = new HashMap<>();
         String[] edges = initialGraph.split("\n");
