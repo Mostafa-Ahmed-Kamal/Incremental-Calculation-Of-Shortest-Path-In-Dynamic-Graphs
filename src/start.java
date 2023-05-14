@@ -1,33 +1,40 @@
+import BatchProcessor.BatchGenerator;
+
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.LinkedList;
+import java.util.List;
 
 public class start {
-    private String initialGraphTest(){
-        return """
-                1 2
-                2 3
-                3 1
-                4 1
-                2 4
-                S
-                """;
+    private List<Thread> createClientThreads(int servicePort, String serviceName, int clientsCount){
+        List<Thread> clients = new LinkedList<>();
+        for (int i = 0; i < clientsCount; i++) {
+            clients.add(new Thread(()->{
+                try {
+                    Client client = new Client(servicePort,serviceName);
+                    BatchGenerator batchGenerator = new BatchGenerator();
+                    for (int j=0 ; j<5 ; j++){
+//                        System.out.println("c1 Batch "+j+":\n"+client.sendBatch(batchGenerator.generateRandomBatch(2,4,10)));
+                        System.out.println("c1 Batch "+j+":\n"+client.sendBatch(batchGenerator.generateCustomBatch()));
+                        Thread.sleep(1000);
+                    }
+                }
+                catch (NotBoundException | RemoteException | MalformedURLException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }));
+        }
+        return clients;
     }
-    private String randomBatchTest(){
-        return """
-                A 4 5
-                A 5 3
-                Q 1 3
-                D 2 3
-                Q 1 3
-                F
-                """;
-    }
+
     public static void main(String[] args) throws InterruptedException {
         start start = new start();
+        BatchGenerator mainBatchGenerator = new BatchGenerator();
         int servicePort = 1099;
         String serviceName = "BatchProcessor";
-        String initialGraph = start.initialGraphTest();
+//        String initialGraph = mainBatchGenerator.generateRandomGraphInitializer(10,10);
+        String initialGraph = mainBatchGenerator.generateCustomGraphInitializer();
         Thread serverThread = new Thread(() ->{
             try {
                 Server.start(initialGraph,servicePort,serviceName);
@@ -37,21 +44,13 @@ public class start {
         });
         serverThread.start();
         Thread.sleep(1000);
-        Thread clientThread = new Thread(()->{
-            try {
-                Client client = new Client(servicePort,serviceName);
-                for (int i = 0; i < 5; i++) {
-                    System.out.println("Batch "+i+":\n"+client.sendBatch(start.randomBatchTest()));
-                    Thread.sleep(1000);
-                    }
-                }
-            catch (NotBoundException | RemoteException | MalformedURLException | InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-        clientThread.start();
-
+        List<Thread> clients = start.createClientThreads(servicePort,serviceName,2);
+        for (Thread client:clients) {
+            client.start();
+        }
+        for (Thread client:clients){
+            client.join();
+        }
         serverThread.join();
-        clientThread.join();
     }
 }
