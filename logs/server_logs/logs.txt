@@ -1,100 +1,100 @@
 batch received:
-q 3 2
-a 0 7
-d 9 2
-q 5 2
+q 6 8
+q 4 7
+d 4 5
+d 1 8
 F
 result:
 -1
--1
+2
 
 batch received:
-q 9 4
-a 9 3
-q 6 1
-d 4 4
-F
-result:
-1
--1
-
-batch received:
-q 7 2
-q 0 8
-d 8 3
-d 5 6
-F
-result:
--1
--1
-
-batch received:
-q 0 1
-q 9 8
-d 0 6
-a 5 1
-F
-result:
-1
--1
-
-batch received:
-d 8 0
-a 4 2
-q 9 4
-q 3 8
-F
-result:
-1
--1
-
-batch received:
-q 3 8
+q 8 0
 a 3 1
-q 4 4
-d 4 8
-F
-result:
--1
-0
-
-batch received:
-q 3 6
-q 4 4
-d 1 4
-a 6 4
-F
-result:
--1
-0
-
-batch received:
-a 8 2
-d 9 4
-q 3 9
-q 9 4
+q 5 6
+a 1 5
 F
 result:
 -1
 -1
 
 batch received:
-d 9 5
-q 1 4
-d 9 8
-q 7 1
+d 2 3
+q 0 3
+a 6 5
+q 4 2
+F
+result:
+1
+1
+
+batch received:
+d 1 1
+d 8 3
+q 8 4
+q 7 5
 F
 result:
 -1
 -1
 
 batch received:
-q 3 0
-q 0 6
-a 0 5
-a 9 4
+q 6 8
+q 1 6
+a 2 0
+a 6 9
+F
+result:
+-1
+-1
+
+batch received:
+d 4 1
+d 2 6
+q 7 8
+q 4 2
+F
+result:
+-1
+1
+
+batch received:
+q 5 2
+a 6 9
+a 8 5
+q 8 6
 F
 result:
 1
 -1
+
+batch received:
+q 5 9
+a 1 5
+q 4 0
+d 6 0
+F
+result:
+-1
+2
+
+batch received:
+d 7 1
+q 4 3
+a 7 9
+q 7 0
+F
+result:
+3
+-1
+
+batch received:
+d 4 4
+q 0 7
+d 0 5
+q 6 7
+F
+result:
+1
+3
 
