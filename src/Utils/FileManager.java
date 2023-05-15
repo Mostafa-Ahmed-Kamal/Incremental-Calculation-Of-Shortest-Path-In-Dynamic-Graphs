@@ -1,9 +1,7 @@
 package Utils;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.HashMap;
 
 public class FileManager {
     public static void createFolder(String path){
@@ -25,6 +23,22 @@ public class FileManager {
             System.out.println("An error occurred while appending to the file: " + filePath);
             e.printStackTrace();
         }
+    }
+    public static HashMap<String,String> readKeyValuePairs(String filePath){
+        HashMap<String,String> systemProperties = new HashMap<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] keyValuePair = line.split("\\s*=\\s*");
+                if (keyValuePair.length!=2)continue;
+                systemProperties.put(keyValuePair[0],keyValuePair[1]);
+            }
+        }
+        catch (IOException e) {
+            System.out.println("An error occurred while reading the file: " + filePath);
+            e.printStackTrace();
+        }
+        return systemProperties;
     }
     private static void deleteFolder(File folder) {
         File[] files = folder.listFiles();

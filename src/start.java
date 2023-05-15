@@ -40,26 +40,11 @@ public class start {
         }
         return clients;
     }
-    private HashMap<String,String> readSystemProperties(String filePath){
-        HashMap<String,String> systemProperties = new HashMap<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] keyValuePair = line.split("\\s*=\\s*");
-                if (keyValuePair.length!=2)continue;
-                systemProperties.put(keyValuePair[0],keyValuePair[1]);
-            }
-        }
-        catch (IOException e) {
-            System.out.println("An error occurred while reading the file: " + filePath);
-            e.printStackTrace();
-        }
-        return systemProperties;
-    }
+
     public static void main(String[] args) throws InterruptedException {
         start start = new start();
         String workingDirectory = "logs";
-        HashMap<String,String> systemProperties = start.readSystemProperties("system.properties");
+        HashMap<String,String> systemProperties = FileManager.readKeyValuePairs("system.properties");
         BatchGenerator mainBatchGenerator = new BatchGenerator();
         FileManager.createFolder(workingDirectory);
         int servicePort = Integer.parseInt(systemProperties.getOrDefault("GSP.rmiregistry.port","1099"));
