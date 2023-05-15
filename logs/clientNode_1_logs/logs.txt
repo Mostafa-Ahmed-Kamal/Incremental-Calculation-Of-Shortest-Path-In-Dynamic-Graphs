@@ -1,0 +1,60 @@
+sendTime: 17:35:43.906804900
+receivedTime: 17:35:43.917808700
+batch sent:
+q 3 2
+a 0 7
+d 9 2
+q 5 2
+F
+result:
+-1
+-1
+
+sendTime: 17:35:44.920773600
+receivedTime: 17:35:44.922774
+batch sent:
+q 0 1
+q 9 8
+d 0 6
+a 5 1
+F
+result:
+1
+-1
+
+sendTime: 17:35:45.924197
+receivedTime: 17:35:45.925199800
+batch sent:
+d 8 0
+a 4 2
+q 9 4
+q 3 8
+F
+result:
+1
+-1
+
+sendTime: 17:35:46.929259
+receivedTime: 17:35:46.930261
+batch sent:
+q 3 6
+q 4 4
+d 1 4
+a 6 4
+F
+result:
+-1
+0
+
+sendTime: 17:35:47.932275800
+receivedTime: 17:35:47.933274800
+batch sent:
+d 9 5
+q 1 4
+d 9 8
+q 7 1
+F
+result:
+-1
+-1
+
