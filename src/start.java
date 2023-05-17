@@ -25,21 +25,21 @@ public class start {
                     Random random = new Random();
                     Client client = new Client(servicePort,serviceName);
                     BatchGenerator batchGenerator = new BatchGenerator();
-                    for (int j=0 ; j<100 ; j++){
+                    for (int j=0 ; j<5 ; j++){
                         String randomBatch = batchGenerator.generateRandomBatch(writePercentage,batchSize,graphSize);
 //                        String randomBatch = batchGenerator.generateCustomBatch();
                         LocalTime sendTime = LocalTime.now();
                         String batchResult = client.sendBatch(randomBatch);
                         LocalTime receiveTime = LocalTime.now();
                         long timeTaken = receiveTime.toNanoOfDay()-sendTime.toNanoOfDay();
-//                        FileManager.appendToFile(logsFile,"sendTime: "+sendTime + "\nreceivedTime: "+receiveTime+"\ntimeTaken: "+timeTaken/1000000+"ms");
-//                        FileManager.appendToFile(logsFile,"batch sent:\n"+randomBatch+"\nresult:\n"+batchResult);
-                        FileManager.appendToFile(logsFile,""+timeTaken/1000000);
-//                        Thread.sleep(1000);
+                        FileManager.appendToFile(logsFile,"sendTime: "+sendTime + "\nreceivedTime: "+receiveTime+"\ntimeTaken: "+timeTaken/1000000+"ms");
+                        FileManager.appendToFile(logsFile,"batch sent:\n"+randomBatch+"\nresult:\n"+batchResult);
+//                        FileManager.appendToFile(logsFile,""+timeTaken/1000000);
+                        Thread.sleep(1000);
                     }
                     System.out.println("client_"+clientId+" finished");
                 }
-                catch (NotBoundException | RemoteException | MalformedURLException e) {
+                catch (NotBoundException | RemoteException | MalformedURLException | InterruptedException e) {
                     e.printStackTrace();
                 }
             }));

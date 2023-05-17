@@ -1,100 +1,75 @@
-10
+sendTime: 00:05:52.532595500
+receivedTime: 00:05:52.539598200
+timeTaken: 7ms
+batch sent:
+d 2 1
+a 4 2
+q 1 2
+q 2 4
+q 0 1
+F
+result:
+-1
+-1
+-1
+
+sendTime: 00:05:53.553048900
+receivedTime: 00:05:53.557088100
+timeTaken: 4ms
+batch sent:
+q 2 1
+a 4 0
+a 2 3
+q 0 2
+q 1 4
+F
+result:
+-1
+-1
+-1
+
+sendTime: 00:05:54.560706500
+receivedTime: 00:05:54.564767400
+timeTaken: 4ms
+batch sent:
+a 0 0
+q 4 1
+a 4 3
+q 4 2
+q 3 1
+F
+result:
+-1
+1
+-1
+
+sendTime: 00:05:55.571373700
+receivedTime: 00:05:55.573378500
+timeTaken: 2ms
+batch sent:
+a 0 0
+q 1 0
+a 0 1
+q 4 0
+q 3 3
+F
+result:
 2
 1
-2
+0
+
+sendTime: 00:05:56.574605400
+receivedTime: 00:05:56.579605500
+timeTaken: 5ms
+batch sent:
+d 0 0
+d 1 1
+q 1 4
+q 2 1
+q 1 0
+F
+result:
 3
-1
-1
 3
 2
-1
-2
-1
-2
-0
-2
-1
-2
-2
-1
-2
-2
-2
-1
-0
-2
-2
-1
-1
-1
-1
-0
-1
-1
-1
-0
-2
-0
-1
-1
-1
-0
-0
-1
-0
-1
-1
-0
-0
-0
-0
-1
-0
-0
-1
-0
-1
-1
-1
-0
-1
-1
-0
-2
-1
-0
-0
-1
-0
-1
-0
-1
-1
-1
-0
-1
-1
-0
-1
-1
-0
-1
-1
-0
-0
-0
-5
-2
-0
-0
-1
-0
-0
-0
-1
-0
-1
-0
-1
-1
-0
+
