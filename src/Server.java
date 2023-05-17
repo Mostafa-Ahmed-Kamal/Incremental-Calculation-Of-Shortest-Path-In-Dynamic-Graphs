@@ -1,4 +1,5 @@
 import BatchProcessor.BatchProcessor;
+import Utils.FileManager;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -7,8 +8,10 @@ import java.rmi.registry.Registry;
 public class Server {
     public static void start(String initialGraph, int servicePort, String serviceName, String workingDirectory) throws RemoteException {
         BatchProcessor batchProcessor = new BatchProcessor();
-        batchProcessor.chooseWorkingDirectory(workingDirectory);
+        batchProcessor.setWorkingDirectory(workingDirectory);
         batchProcessor.initializeGraph(initialGraph);
+        System.out.println("R");
+        FileManager.appendToFile(workingDirectory+"/logs.txt","Initial Graph:\n"+initialGraph);
         Registry registry = LocateRegistry.createRegistry(servicePort);
         registry.rebind(serviceName,batchProcessor);
     }

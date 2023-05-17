@@ -13,8 +13,9 @@ public class BatchGenerator {
         }
         return initialGraph.append("S").toString();
     }
-    public String generateRandomBatch(int writeCount, int batchSize, int graphSize){
+    public String generateRandomBatch(float writePercentage, int batchSize, int graphSize){
         StringBuilder batch = new StringBuilder();
+        int writeCount = (int)(batchSize*writePercentage);
         int currentSize = 0;
         while(batchSize-currentSize>writeCount){
             int choice = writeCount>0?random.nextInt(2):1;
@@ -65,12 +66,5 @@ public class BatchGenerator {
     }
     private String addOperation(int graphSize, char[] options){
         return options[random.nextInt(options.length)]+" "+random.nextInt(graphSize)+" "+random.nextInt(graphSize)+"\n";
-    }
-
-    public static void main(String[] args) {
-        BatchGenerator bg = new BatchGenerator();
-        for (int i = 0; i < 10; i++) {
-            System.out.println(bg.generateRandomBatch(2,4,10)+"\n");
-        }
     }
 }

@@ -3,6 +3,7 @@ package Graph;
 import java.util.*;
 
 public class Graph_V0 {
+    /**HashMap is used for simulation purposes, in a real-world scenario a distributed file system like hadoop would be used instead*/
     private final HashMap<Integer, HashSet<Integer>> graph;
     public Graph_V0(){
         graph = new HashMap<>();
