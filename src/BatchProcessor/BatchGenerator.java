@@ -15,7 +15,7 @@ public class BatchGenerator {
     }
     public String generateRandomBatch(float writePercentage, int batchSize, int graphSize){
         StringBuilder batch = new StringBuilder();
-        int writeCount = (int)(batchSize*writePercentage);
+        int writeCount = (int) (writePercentage>1?writePercentage:(batchSize*writePercentage));
         int currentSize = 0;
         while(batchSize-currentSize>writeCount){
             int choice = writeCount>0?random.nextInt(2):1;

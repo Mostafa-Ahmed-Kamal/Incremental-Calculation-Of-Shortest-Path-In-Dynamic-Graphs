@@ -10,8 +10,8 @@ import java.time.LocalTime;
 import java.util.Random;
 
 public class start {
-    private static int servicePort,batchSize, clientsCount,graphSize;
-    private static final String serviceName = "BatchProcessor";
+    private static int rmiRegistryPort,batchSize,clientsCount,graphSize;
+    private static String serviceName;
     private static float writePercentage;
     private static List<Thread> createClientThreads(String workingDirectory){
         List<Thread> clients = new LinkedList<>();
@@ -23,7 +23,7 @@ public class start {
             clients.add(new Thread(()->{
                 try {
                     Random random = new Random();
-                    Client client = new Client(servicePort,serviceName);
+                    Client client = new Client(rmiRegistryPort,serviceName);
                     BatchGenerator batchGenerator = new BatchGenerator();
                     for (int j=0 ; j<5 ; j++){
                         String randomBatch = batchGenerator.generateRandomBatch(writePercentage,batchSize,graphSize);
@@ -52,25 +52,26 @@ public class start {
         HashMap<String,String> systemProperties = FileManager.readKeyValuePairs("system.properties");
         BatchGenerator mainBatchGenerator = new BatchGenerator();
         FileManager.createFolder(workingDirectory);
-        servicePort = Integer.parseInt(systemProperties.getOrDefault("GSP.rmiregistry.port","1099"));
+        rmiRegistryPort = Integer.parseInt(systemProperties.getOrDefault("GSP.rmiregistry.port","1099"));
         clientsCount = Integer.parseInt(systemProperties.getOrDefault("GSP.numberOfnodes", "2"));
         graphSize = Integer.parseInt(systemProperties.getOrDefault("GSP.graphSize","10"));
         batchSize = Integer.parseInt(systemProperties.getOrDefault("GSP.clientBatchSize","5"));
         writePercentage = Float.parseFloat(systemProperties.getOrDefault("GSP.writePercentage","0.5"));
+        serviceName = systemProperties.getOrDefault("GSP.serviceName","update");
         String initialGraph = mainBatchGenerator.generateRandomGraphInitializer(graphSize,graphSize);
 //        String initialGraph = mainBatchGenerator.generateCustomGraphInitializer();
         Thread serverThread = new Thread(() ->{
             String serverLogsFolder = workingDirectory+"/server_logs";
             FileManager.createFolder(serverLogsFolder);
             try {
-                Server.start(initialGraph,servicePort,serviceName,serverLogsFolder);
+                Server.start(initialGraph, rmiRegistryPort,serviceName,serverLogsFolder);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
         });
         serverThread.start();
         Thread.sleep(1000);
-        System.out.println("server started at port: "+servicePort);
+        System.out.println("server started at port: "+ rmiRegistryPort);
         List<Thread> clients = createClientThreads(workingDirectory);
         for (Thread client:clients) {
             client.start();
