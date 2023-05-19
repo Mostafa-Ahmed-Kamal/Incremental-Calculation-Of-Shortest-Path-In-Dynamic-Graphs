@@ -2,6 +2,7 @@ package BatchProcessor;
 
 import Graph.Graph_V0;
 import Graph.Graph_V1;
+import Graph.IGraph;
 import Utils.FileManager;
 
 import java.rmi.RemoteException;
@@ -9,7 +10,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 
 public class BatchProcessor extends UnicastRemoteObject implements IBatchProcessor {
-    Graph_V1 graph;
+    IGraph graph;
     String workingDirectory = "logs";
     public BatchProcessor() throws RemoteException {
         super();

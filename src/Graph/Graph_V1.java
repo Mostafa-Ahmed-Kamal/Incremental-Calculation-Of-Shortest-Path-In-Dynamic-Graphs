@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Graph_V1 {
+public class Graph_V1 implements IGraph{
 
     /**HashMap is used for simulation purposes, in a real-world scenario a distributed file system like hadoop would be used instead*/
     private final HashMap<Integer, HashSet<Integer>> graph;
